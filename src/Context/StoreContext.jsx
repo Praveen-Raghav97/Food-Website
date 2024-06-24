@@ -1,9 +1,40 @@
 import  { createContext, useEffect, useState } from "react";
 import { food_list } from "../assets/assets";
 export const   StoreContext = createContext(null)
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const StoreContextProvider = (props) => {
-    
+
+
+    const notify = () => toast('Item added succesfully', {
+        duration: 2000,
+        position: 'bottom-right',
+      
+        // Styling
+        style: {
+            background: '#008000',
+            color: '#fff',
+            
+        },
+        className: '',
+      
+        // Custom Icon
+        icon: '✅',
+      
+        // Change colors of success/error/loading icon
+        iconTheme: {
+          primary: '#000',
+          secondary: '#e9e9e9',
+        },
+      
+        // Aria
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
+
     const [cartItems,SetCartItems] = useState({});
 
     const addToCart = (itemId) => {
@@ -13,6 +44,8 @@ const StoreContextProvider = (props) => {
         else{
             SetCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
         }
+
+        notify();
     }
 
     const removeFromCart = (itemId) => {
