@@ -5,17 +5,44 @@ import toast, { Toaster } from 'react-hot-toast';
 
 
 const StoreContextProvider = (props) => {
-
+    const notify1 = () => toast('Item remove succesfully', {
+        duration: 2000,
+        position: 'right-bottom',
+      
+        // Styling
+        style: {
+            background: '#FF0000',
+            color: '#fff',
+            fontFamily:'sans-serif'
+        },
+        className: '',
+      
+        // Custom Icon
+        icon: '❎',
+      
+        // Change colors of success/error/loading icon
+        iconTheme: {
+          primary: '#000',
+          secondary: '#e9e9e9',
+        },
+        
+      
+        // Aria
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
 
     const notify = () => toast('Item added succesfully', {
         duration: 2000,
-        position: 'bottom-right',
+        position: 'right-bottom',
       
         // Styling
         style: {
             background: '#008000',
             color: '#fff',
-            
+            fontFamily:'sans-serif'
         },
         className: '',
       
@@ -27,6 +54,7 @@ const StoreContextProvider = (props) => {
           primary: '#000',
           secondary: '#e9e9e9',
         },
+
       
         // Aria
         ariaProps: {
@@ -50,6 +78,7 @@ const StoreContextProvider = (props) => {
 
     const removeFromCart = (itemId) => {
         SetCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
+        notify1();
     }
 
     const getTotalCartAmount = () =>{
@@ -61,6 +90,7 @@ const StoreContextProvider = (props) => {
             }
         }
         return totalAmount
+
       }
 
     const contextValue ={
